@@ -14,15 +14,15 @@ public class Main {
             type = "Student";
         }
         else if(choice == 2) {
-            JOptionPane.showMessageDialog(null, "You are a professor");
+            JOptionPane.showMessageDialog(null, "You are a Professor");
             Professor professor = new Professor();
-            professor.p_login();
+            flag = professor.p_login();
             type = "Professor";
         }
         else if(choice == 3) {
-            JOptionPane.showMessageDialog(null, "You are an admin");
+            JOptionPane.showMessageDialog(null, "You are an Admin");
             Admin admin = new Admin();
-            admin.a_login();
+            flag = admin.a_login();
             type = "Admin";
         }
         else {
@@ -31,8 +31,8 @@ public class Main {
 
 
         if(!flag) {
-            JOptionPane.showMessageDialog(null, "Invalid email or password");
-            JOptionPane.showMessageDialog(null, "Please create a new account or login to continue");
+            JOptionPane.showMessageDialog(null, "Login Error");
+            JOptionPane.showMessageDialog(null, "Restart ERP to try again");
             return;
         }
 

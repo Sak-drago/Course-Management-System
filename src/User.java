@@ -5,8 +5,8 @@ public class User {
     String email;
     String password;
     static HashMap<String, String> Students = new HashMap< String, String>();
-    static Map<String, String> Professors;
-    static Map<String, String> Admins;
+    static Map<String, String> Professors = new HashMap<String,String>();
+    static Map<String, String> Admins = new HashMap<String,String>();
 
     public User(String email, String password) {
         this.email = email;
