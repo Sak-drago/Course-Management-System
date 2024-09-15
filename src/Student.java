@@ -9,7 +9,7 @@ public class Student extends User {
     private int max_credits = 20;
 
 
-    public boolean login(){
+    public boolean s_login(){
         JOptionPane.showMessageDialog(null, "Please create or login to continue\n Choose 1 for creating a new account\n Choose 2 for login");
         int choice = Integer.parseInt(JOptionPane.showInputDialog(null,"Enter your choice"));
         boolean flag = false;

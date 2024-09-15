@@ -10,19 +10,19 @@ public class Main {
         if(choice == 1) {
             JOptionPane.showMessageDialog(null, "You are a student");
             Student student = new Student();
-            flag = student.login();
+            flag = student.s_login();
             type = "Student";
         }
         else if(choice == 2) {
             JOptionPane.showMessageDialog(null, "You are a professor");
-            //Professor professor = new Professor();
-            //professor.professorLogin();
+            Professor professor = new Professor();
+            professor.p_login();
             type = "Professor";
         }
         else if(choice == 3) {
             JOptionPane.showMessageDialog(null, "You are an admin");
-            //Admin admin = new Admin();
-            //admin.adminLogin();
+            Admin admin = new Admin();
+            admin.a_login();
             type = "Admin";
         }
         else {
