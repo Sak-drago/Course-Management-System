@@ -4,13 +4,23 @@ import java.util.List;
 
 public class Admin extends User{
     private String Admin_name;
+    public static String email;
+    public static String password;
 
+    public Admin(String email, String password) {
+        super(email, password);
+        this.email = email;
+        this.password = password;
+    }
 
     public static void print_course(){
         System.out.println("Course List called: " +CourseList.size());
+        String courses_list = "";
         for(int i = 0; i<CourseList.size();i++){
-            JOptionPane.showMessageDialog(null, "Course Code: "+CourseList.get(i).CourseCode+"\nCourse Name: "+CourseList.get(i).Course_name+"\nCredits: "+CourseList.get(i).Credits+"\nProfessor: "+CourseList.get(i).Professor_name+"\nEnrollment Limit: "+CourseList.get(i).enrollement_limit+"\nClass Timings: "+CourseList.get(i).class_timings);
+            courses_list = courses_list + "Course Code: "+CourseList.get(i).CourseCode+"\nCourse Name: "+CourseList.get(i).Course_name+"\nCredits: "+CourseList.get(i).Credits+"\nProfessor: "+CourseList.get(i).Professor_name+"\nEnrollment Limit: "+CourseList.get(i).enrollement_limit+"\nClass Timings: "+CourseList.get(i).class_timings;
+            courses_list = courses_list + "\n======================================================================\n";
         }
+        JOptionPane.showMessageDialog(null, courses_list);
     }
 
 
@@ -32,13 +42,13 @@ public class Admin extends User{
             JOptionPane.showMessageDialog(null, "Please create a new account to continue");
             String email = JOptionPane.showInputDialog(null,"Enter your email");
             String password = JOptionPane.showInputDialog(null,"Enter your password");
-            User user = new User(email, password);
-            User.Professors.put(email, password);
+            //Admin user = new User(email, password);
+            //User.Professors.put(email, password);
             JOptionPane.showMessageDialog(null, "Account created successfully\nPlease login to continue");
             String email1 = JOptionPane.showInputDialog(null,"Enter your email");
             String password1 = JOptionPane.showInputDialog(null,"Enter your password");
             for(int i =0;i<User.Professors.size();i++){
-                if(User.Professors.containsKey(email1) && User.Professors.containsValue(password1)){
+                if(Admins.get(i).email.equals(email1) && Admins.get(i).password.equals(password1)){
                     JOptionPane.showMessageDialog(null, "Login successful");
                     flag = true;
                     break;
@@ -54,7 +64,7 @@ public class Admin extends User{
             String password = JOptionPane.showInputDialog(null,"Enter your password");
             User user = new User(email, password);
             for(int i =0;i<User.Professors.size();i++){
-                if(User.Professors.containsKey(email) && User.Professors.containsValue(password)){
+                if(Admins.get(i).email.equals(email) && Admins.get(i).password.equals(password)){
                     JOptionPane.showMessageDialog(null, "Login successful");
                     flag = true;
                     break;

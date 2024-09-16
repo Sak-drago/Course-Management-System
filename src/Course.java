@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.List;
 
 public class Course{
@@ -8,6 +9,7 @@ public class Course{
     //private String[] prerequisites;
     public int enrollement_limit ;
     public String class_timings ;
+    static List<String> StudentList = new ArrayList<>();
 
     public Course(String CCode, int Cred, String name, String Professor_taking, int limit, String timings){
         this.CourseCode = CCode;

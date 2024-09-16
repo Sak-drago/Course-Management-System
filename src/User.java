@@ -5,11 +5,12 @@ import java.util.List;
 import java.util.Map;
 
 public class User {
-    String email;
-    String password;
-    static HashMap<String, String> Students = new HashMap< String, String>();
-    static Map<String, String> Professors = new HashMap<String,String>();
-    static Map<String, String> Admins = new HashMap<String,String>();
+    public static String email;
+    public static String password;
+    public static List<Student> Students = new ArrayList<>();
+    public static List<Professor> Professors = new ArrayList<>();
+
+    public static List<Admin> Admins = new ArrayList<>();
 
     public User(String email, String password) {
         this.email = email;
@@ -17,10 +18,19 @@ public class User {
     }
 
 
+    public static void initialiseProf() {
+        Professors.add(new Professor("prof1", "prof1"));
+        Professors.add(new Professor("prof2", "prof2"));
+        Professors.add(new Professor("prof3", "prof3"));
+    }
+
     public static List<Course> CourseList = new ArrayList<>();
     public User() {
+        initialiseProf();
         Course DSA = new Course("DSA", 4, "Data Structures and Algorithms", "Prof. A", 50, "10:00-11:00");
         CourseList.add(DSA);
+        Course CSA = new Course("CSA", 4, "Data Structures and Algorithms", "Prof. A", 50, "10:00-11:00");
+        CourseList.add(CSA);
     }
 
 
