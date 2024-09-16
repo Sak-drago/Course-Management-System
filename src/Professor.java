@@ -86,10 +86,10 @@ public class Professor extends User {
     }
 
     public static void view_student_list_course() {
+        String courseCode = JOptionPane.showInputDialog(null, "Enter the course code of the course you want to view the list of students");
         StringBuilder students_list = new StringBuilder("Student List\n");
         for (Course course : User.CourseList) {
-            if (course.CCode.equals(CourseCode)) {
-                JOptionPane.showMessageDialog(null, "Course Found");
+            if (course.CCode.equals(courseCode)) {
                 for (String student_email : Course.StudentList) {
                     students_list.append("Email: ").append(student_email).append("\n");
                 }
