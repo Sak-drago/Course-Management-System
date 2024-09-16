@@ -1,6 +1,18 @@
 import javax.swing.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Admin extends User{
+    private String Admin_name;
+
+
+    public static void print_course(){
+        System.out.println("Course List called: " +CourseList.size());
+        for(int i = 0; i<CourseList.size();i++){
+            JOptionPane.showMessageDialog(null, "Course Code: "+CourseList.get(i).CourseCode+"\nCourse Name: "+CourseList.get(i).Course_name+"\nCredits: "+CourseList.get(i).Credits+"\nProfessor: "+CourseList.get(i).Professor_name+"\nEnrollment Limit: "+CourseList.get(i).enrollement_limit+"\nClass Timings: "+CourseList.get(i).class_timings);
+        }
+    }
+
 
     public boolean a_login(){
         JOptionPane.showMessageDialog(null, "Please create or login to continue\n Choose 1 for creating a new account\n Choose 2 for login");

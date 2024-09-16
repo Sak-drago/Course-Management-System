@@ -1,4 +1,7 @@
+import javax.swing.*;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class User {
@@ -14,7 +17,11 @@ public class User {
     }
 
 
+    public static List<Course> CourseList = new ArrayList<>();
     public User() {
-
+        Course DSA = new Course("DSA", 4, "Data Structures and Algorithms", "Prof. A", 50, "10:00-11:00");
+        CourseList.add(DSA);
     }
+
+
 }
