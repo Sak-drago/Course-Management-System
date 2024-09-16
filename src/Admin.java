@@ -79,5 +79,70 @@ public class Admin extends User{
         }
         return flag;
     }
+
+    public static void adminMenu(Admin admin){
+        while(true){
+            JOptionPane.showMessageDialog(null, "Please select an option\n (1)View Course\n (2)Add Course or Delete Course\n (3)Edit Student Details\n (4)Assign Professor to Course\n (5)Exit");
+            int choice = Integer.parseInt(JOptionPane.showInputDialog(null,"Enter your choice"));
+            if(choice == 1){
+                print_course();
+            }
+            else if(choice == 2){
+                JOptionPane.showMessageDialog(null, "Please select an option\n (1)Add Course\n (2)Delete Course");
+                int choice1 = Integer.parseInt(JOptionPane.showInputDialog(null,"Enter your choice"));
+                if (choice1 == 1){
+                    String CCode = JOptionPane.showInputDialog(null,"Enter the Course Code");
+                    String Course_name = JOptionPane.showInputDialog(null,"Enter the Course Name");
+                    int Credits = Integer.parseInt(JOptionPane.showInputDialog(null,"Enter the Credits"));
+                    String Professor_name = JOptionPane.showInputDialog(null,"Enter the Professor Name");
+                    int enrollement_limit = Integer.parseInt(JOptionPane.showInputDialog(null,"Enter the Enrollment Limit"));
+                    String class_timings = JOptionPane.showInputDialog(null,"Enter the Class Timings");
+                    Course course = new Course(CCode, Credits, Course_name, Professor_name, enrollement_limit, class_timings);
+                    CourseList.add(course);
+                }
+                else if(choice1 == 2){
+                    String CCode = JOptionPane.showInputDialog(null,"Enter the Course Code to delete");
+                    for(int i = 0; i<CourseList.size();i++){
+                        if(CourseList.get(i).CCode.equals(CCode)){
+                            CourseList.remove(i);
+                            JOptionPane.showMessageDialog(null, "Course deleted successfully");
+                            break;
+                        }
+                    }
+                }
+            }
+            else if(choice == 3){
+                String email = JOptionPane.showInputDialog(null,"Enter the Student Email");
+                for(int i = 0; i<Student.Students.size();i++){
+                    if(Student.Students.get(i).email.equals(email)){
+                        String new_email = JOptionPane.showInputDialog(null,"Enter the new Email");
+                        String new_password = JOptionPane.showInputDialog(null,"Enter the new Password");
+                        Student.Students.get(i).email = new_email;
+                        Student.Students.get(i).password = new_password;
+                        JOptionPane.showMessageDialog(null, "Student details updated successfully");
+                        break;
+                    }
+                }
+            }
+            else if(choice == 4){
+                String CCode = JOptionPane.showInputDialog(null,"Enter the Course Code");
+                String Professor_name = JOptionPane.showInputDialog(null,"Enter the Professor Name");
+                for(int i = 0; i<CourseList.size();i++){
+                    if(CourseList.get(i).CCode.equals(CCode)){
+                        CourseList.get(i).Professor_name = Professor_name;
+                        JOptionPane.showMessageDialog(null, "Professor assigned successfully");
+                        break;
+                    }
+                }
+            }
+            else if(choice == 5){
+                JOptionPane.showMessageDialog(null, "Exiting Admin Menu");
+                return;
+            }
+            else {
+                JOptionPane.showMessageDialog(null, "Invalid choice");
+            }
+        }
+    }
 }
 

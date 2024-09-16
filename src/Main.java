@@ -41,6 +41,7 @@ public class Main {
                     JOptionPane.showMessageDialog(null, "Restart CMS to try again");
                     return;
                 }
+                Admin.adminMenu(admin);
             } else if (choice == 4) {
                 JOptionPane.showMessageDialog(null, "Exiting CMS");
                 return;

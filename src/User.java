@@ -21,6 +21,7 @@ public class User {
         Professors.add(new Professor("sak", "sak", "DSA"));
         Professors.add(new Professor("prof2", "prof2", "CSA"));
         Professors.add(new Professor("prof3", "prof3", ""));
+        Admins.add(new Admin("admin", "admin"));
         Students.add(new Student("sak","sak"));
     }
 
