@@ -4,7 +4,7 @@ public class Main {
     public static void main(String[] args) {
         JOptionPane.showMessageDialog(null, "Welcome to the Course Management System");
         Student student = new Student("email", "password");
-        Professor professor = new Professor("email", "password");
+        Professor professor = new Professor("email", "password", "code");
         Admin admin = new Admin("email", "password");
 
         while (true) {
@@ -31,6 +31,7 @@ public class Main {
                     JOptionPane.showMessageDialog(null, "Restart CMS to try again");
                     return;
                 }
+                Professor.professorMenu(professor);
             } else if (choice == 3) {
                 JOptionPane.showMessageDialog(null, "Admin Login");
                 User user = new User();

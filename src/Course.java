@@ -2,7 +2,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Course{
-    public String CourseCode ;
+    public String CCode ;
+    public String Syllabus;
     public int Credits ;
     public String Course_name ;
     public String Professor_name ;
@@ -12,7 +13,7 @@ public class Course{
     static List<String> StudentList = new ArrayList<>();
 
     public Course(String CCode, int Cred, String name, String Professor_taking, int limit, String timings){
-        this.CourseCode = CCode;
+        this.CCode = CCode;
         this.Credits = Cred;
         this.Course_name =  name;
         this.Professor_name = Professor_taking;

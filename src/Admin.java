@@ -17,7 +17,7 @@ public class Admin extends User{
         System.out.println("Course List called: " +CourseList.size());
         String courses_list = "";
         for(int i = 0; i<CourseList.size();i++){
-            courses_list = courses_list + "Course Code: "+CourseList.get(i).CourseCode+"\nCourse Name: "+CourseList.get(i).Course_name+"\nCredits: "+CourseList.get(i).Credits+"\nProfessor: "+CourseList.get(i).Professor_name+"\nEnrollment Limit: "+CourseList.get(i).enrollement_limit+"\nClass Timings: "+CourseList.get(i).class_timings;
+            courses_list = courses_list + "Course Code: "+CourseList.get(i).CCode+"\nCourse Name: "+CourseList.get(i).Course_name+"\nCredits: "+CourseList.get(i).Credits+"\nProfessor: "+CourseList.get(i).Professor_name+"\nEnrollment Limit: "+CourseList.get(i).enrollement_limit+"\nClass Timings: "+CourseList.get(i).class_timings;
             courses_list = courses_list + "\n======================================================================\n";
         }
         JOptionPane.showMessageDialog(null, courses_list);

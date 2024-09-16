@@ -5,11 +5,11 @@ import java.util.Map;
 
 public class Student extends User {
     private static List<Course> courses = new ArrayList<>();
-    public static String email;
-    public static String password;
+    public String email;
+    public String password;
     private Map<Course, Integer> course_grades;
     private int credits;
-    private int max_credits = 20;
+    private static int max_credits = 20;
     private String schedule;
     private String CGPA;
 
@@ -101,7 +101,7 @@ public class Student extends User {
     public static void view_registered_courses() {
         String courses_list = "";
         for(int i = 0; i<courses.size();i++){
-            courses_list = courses_list + "Course Code: "+CourseList.get(i).CourseCode+"\nCourse Name: "+CourseList.get(i).Course_name+"\nCredits: "+CourseList.get(i).Credits+"\nProfessor: "+CourseList.get(i).Professor_name+"\nEnrollment Limit: "+CourseList.get(i).enrollement_limit+"\nClass Timings: "+CourseList.get(i).class_timings;
+            courses_list = courses_list + "Course Code: "+CourseList.get(i).CCode+"\nCourse Name: "+CourseList.get(i).Course_name+"\nCredits: "+CourseList.get(i).Credits+"\nProfessor: "+CourseList.get(i).Professor_name+"\nEnrollment Limit: "+CourseList.get(i).enrollement_limit+"\nClass Timings: "+CourseList.get(i).class_timings;
             courses_list = courses_list + "\n======================================================================\n";
         }
         JOptionPane.showMessageDialog(null, courses_list);
@@ -112,7 +112,7 @@ public class Student extends User {
         Admin.print_course();
         String course_name = JOptionPane.showInputDialog(null,"Enter the course code for the course you want to register for");
         for(Course course : CourseList){
-            if(course.CourseCode.equals(course_name)){
+            if(course.CCode.equals(course_name)){
                 courses.add(course);
                 Course.StudentList.add(User.email);
                 JOptionPane.showMessageDialog(null, "Course registered successfully");
@@ -126,7 +126,7 @@ public class Student extends User {
         view_registered_courses();
         String course_name = JOptionPane.showInputDialog(null,"Enter the course code of the course name you want to drop");
         for(Course course : courses){
-            if(course.CourseCode.equals(course_name)){
+            if(course.CCode.equals(course_name)){
                 courses.remove(course);
                 JOptionPane.showMessageDialog(null, "Course dropped successfully");
                 break;

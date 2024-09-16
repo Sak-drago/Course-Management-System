@@ -9,7 +9,6 @@ public class User {
     public static String password;
     public static List<Student> Students = new ArrayList<>();
     public static List<Professor> Professors = new ArrayList<>();
-
     public static List<Admin> Admins = new ArrayList<>();
 
     public User(String email, String password) {
@@ -19,9 +18,10 @@ public class User {
 
 
     public static void initialiseProf() {
-        Professors.add(new Professor("prof1", "prof1"));
-        Professors.add(new Professor("prof2", "prof2"));
-        Professors.add(new Professor("prof3", "prof3"));
+        Professors.add(new Professor("sak", "sak", "DSA"));
+        Professors.add(new Professor("prof2", "prof2", "CSA"));
+        Professors.add(new Professor("prof3", "prof3", ""));
+        Students.add(new Student("sak","sak"));
     }
 
     public static List<Course> CourseList = new ArrayList<>();
