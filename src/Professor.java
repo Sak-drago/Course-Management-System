@@ -101,6 +101,7 @@ public class Professor extends User {
 
     public static void edit_course() {
         String courseCode = JOptionPane.showInputDialog(null, "Enter the course code of the course you want to edit");
+        try{
         for (Course course : User.CourseList) {
             if (course.CCode.equals(courseCode)) {
                 List<String> options = Arrays.asList("Class Timings", "Syllabus", "Credits");
@@ -126,15 +127,16 @@ public class Professor extends User {
                 }
 
                 JOptionPane.showMessageDialog(null, "Course details updated successfully");
-                String courses_details= course.CCode+"\nCourse Name: "+course.Course_name+"\nCredits: "+course.Credits+"\nProfessor: "+course.Professor_name+"\nEnrollment Limit: "+course.enrollement_limit+"\nClass Timings: "+course.class_timings;
+                String courses_details = course.CCode + "\nCourse Name: " + course.Course_name + "\nCredits: " + course.Credits + "\nProfessor: " + course.Professor_name + "\nEnrollment Limit: " + course.enrollement_limit + "\nClass Timings: " + course.class_timings;
                 JOptionPane.showMessageDialog(null, courses_details);
-                }
-
-            else {
+            } else {
                 JOptionPane.showMessageDialog(null, "Course not found");
             }
-                return;
-
+            return;
+            }
+        }
+        catch(NullPointerException e){
+            JOptionPane.showMessageDialog(null, "Course not found");
         }
     }
 

@@ -100,12 +100,17 @@ public class Admin extends User{
                 }
                 else if(choice1 == 2){
                     String CCode = JOptionPane.showInputDialog(null,"Enter the Course Code to delete");
-                    for(int i = 0; i<CourseList.size();i++){
-                        if(CourseList.get(i).CCode.equals(CCode)){
-                            CourseList.remove(i);
-                            JOptionPane.showMessageDialog(null, "Course deleted successfully");
-                            break;
+                    try {
+                        for (int i = 0; i < CourseList.size(); i++) {
+                            if (CourseList.get(i).CCode.equals(CCode)) {
+                                CourseList.remove(i);
+                                JOptionPane.showMessageDialog(null, "Course deleted successfully");
+                                break;
+                            }
                         }
+                    }
+                    catch(NullPointerException e){
+                        JOptionPane.showMessageDialog(null, "Course does not exist");
                     }
                 }
             }
