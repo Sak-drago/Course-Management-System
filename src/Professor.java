@@ -141,9 +141,8 @@ public class Professor extends User {
     }
 
     public static void initaliseAccs() {
-        Professors.add(new Professor("sak", "sak", "DSA"));
+        Professors.add(new Professor("prof1", "prof1", "DSA"));
         Professors.add(new Professor("prof2", "prof2", "CSA"));
-        Professors.add(new Professor("prof3", "prof3", ""));
     }
 }
 

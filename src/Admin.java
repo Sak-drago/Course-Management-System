@@ -3,7 +3,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Admin extends User{
-    private String Admin_name;
     public static String email;
     public static String password;
 
