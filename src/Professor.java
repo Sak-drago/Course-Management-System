@@ -17,7 +17,7 @@ public class Professor extends User {
         this.CourseCode = CourseCode;
     }
 
-    public boolean p_login() {
+    public boolean login() {
         JOptionPane.showMessageDialog(null, "Please create or login to continue\n Choose 1 for creating a new account\n Choose 2 for login");
         int choice = Integer.parseInt(JOptionPane.showInputDialog(null, "Enter your choice"));
         boolean flag = false;

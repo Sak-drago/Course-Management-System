@@ -16,7 +16,7 @@ public class Main {
             if (choice == 0) {
                 JOptionPane.showMessageDialog(null, "Student Login");
                 Student user = new Student("email", "password");
-                flag = student.s_login();
+                flag = student.login();
                 if (!flag) {
                     JOptionPane.showMessageDialog(null, "Login Error");
                     JOptionPane.showMessageDialog(null, "Restart CMS to try again");
@@ -27,7 +27,7 @@ public class Main {
             } else if (choice == 1) {
                 JOptionPane.showMessageDialog(null, "Professor Login");
                 Professor user = new Professor("email", "password", "code");
-                flag = professor.p_login();
+                flag = professor.login();
                 if (!flag) {
                     JOptionPane.showMessageDialog(null, "Login Error");
                     JOptionPane.showMessageDialog(null, "Restart CMS to try again");
@@ -37,7 +37,7 @@ public class Main {
             } else if (choice == 2) {
                 JOptionPane.showMessageDialog(null, "Admin Login");
                 Admin user = new Admin("email", "password");
-                flag = admin.a_login();
+                flag = admin.login();
                 if (!flag) {
                     JOptionPane.showMessageDialog(null, "Login Error");
                     JOptionPane.showMessageDialog(null, "Restart CMS to try again");

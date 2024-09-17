@@ -4,7 +4,7 @@ public class Complaints {
     String Complaint;
     boolean status;
     String show_status;
-    public Complaints(int Complaint_Code,String complaint){
+    public Complaints(int Complaint_Code,String complaint, String person){
         this.person = person;
         this.Complaint_Code = Complaint_Code;
         this.Complaint = complaint;

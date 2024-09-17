@@ -24,7 +24,7 @@ public class Admin extends User{
     }
 
 
-    public boolean a_login(){
+    public boolean login(){
         JOptionPane.showMessageDialog(null, "Please create or login to continue\n Choose 1 for creating a new account\n Choose 2 for login");
         int choice = Integer.parseInt(JOptionPane.showInputDialog(null,"Enter your choice"));
         boolean flag = false;
@@ -45,7 +45,7 @@ public class Admin extends User{
             JOptionPane.showMessageDialog(null, "Account created successfully\nPlease login to continue");
             String email1 = JOptionPane.showInputDialog(null,"Enter your email");
             String password1 = JOptionPane.showInputDialog(null,"Enter your password");
-            for(int i =0;i<User.Professors.size();i++){
+            for(int i =0;i<User.Admins.size();i++){
                 if(Admins.get(i).email.equals(email1) && Admins.get(i).password.equals(password1)){
                     JOptionPane.showMessageDialog(null, "Login successful");
                     flag = true;

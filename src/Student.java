@@ -20,7 +20,7 @@ public class Student extends User {
         this.password = password;
     }
 
-    public boolean s_login(){
+    public boolean login(){
         JOptionPane.showMessageDialog(null, "Please create or login to continue\n Choose 1 for creating a new account\n Choose 2 for login");
         int choice = Integer.parseInt(JOptionPane.showInputDialog(null,"Enter your choice"));
         boolean flag = false;
@@ -101,11 +101,16 @@ public class Student extends User {
     }
     public static void view_registered_courses() {
         String courses_list = "";
-        for(int i = 0; i<courses.size();i++){
-            courses_list = courses_list + "Course Code: "+CourseList.get(i).CCode+"\nCourse Name: "+CourseList.get(i).Course_name+"\nCredits: "+CourseList.get(i).Credits+"\nProfessor: "+CourseList.get(i).Professor_name+"\nEnrollment Limit: "+CourseList.get(i).enrollement_limit+"\nClass Timings: "+CourseList.get(i).class_timings;
-            courses_list = courses_list + "\n======================================================================\n";
-        }
+        try {
+            for (int i = 0; i < courses.size(); i++) {
+                courses_list = courses_list + "Course Code: " + CourseList.get(i).CCode + "\nCourse Name: " + CourseList.get(i).Course_name + "\nCredits: " + CourseList.get(i).Credits + "\nProfessor: " + CourseList.get(i).Professor_name + "\nEnrollment Limit: " + CourseList.get(i).enrollement_limit + "\nClass Timings: " + CourseList.get(i).class_timings;
+                courses_list = courses_list + "\n======================================================================\n";
+            }
         JOptionPane.showMessageDialog(null, courses_list,"Courses",JOptionPane.INFORMATION_MESSAGE);
+        }
+        catch(NullPointerException e){
+            JOptionPane.showMessageDialog(null, "No courses registered");
+        }
     }
 
     public static void register_course(){
@@ -158,7 +163,7 @@ public class Student extends User {
         int choice = JOptionPane.showOptionDialog(null,"Choose an option", "Complaint Box", JOptionPane.DEFAULT_OPTION,JOptionPane.INFORMATION_MESSAGE, null, options.toArray(), null);
         if(choice == 0) {
             String complaint = JOptionPane.showInputDialog(null, "Enter your complaint");
-            Complaints.add(new Complaints(Complaints.size() + 1, complaint));
+            Complaints.add(new Complaints(Complaints.size() + 1, complaint, User.email));
             JOptionPane.showMessageDialog(null, "Complaint submitted successfully");
         }
         else if(choice == 1){
