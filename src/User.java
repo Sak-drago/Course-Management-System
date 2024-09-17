@@ -1,12 +1,10 @@
-import javax.swing.*;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
-public class User {
+abstract public class User {
     public static String email;
     public static String password;
+    public static String name;
     public static List<Student> Students = new ArrayList<>();
     public static List<Professor> Professors = new ArrayList<>();
     public static List<Admin> Admins = new ArrayList<>();
@@ -18,17 +16,12 @@ public class User {
     }
 
 
-    public static void initialiseProf() {
-        Professors.add(new Professor("sak", "sak", "DSA"));
-        Professors.add(new Professor("prof2", "prof2", "CSA"));
-        Professors.add(new Professor("prof3", "prof3", ""));
-        Admins.add(new Admin("admin", "admin"));
-        Students.add(new Student("sak","sak"));
+    public static void initialiseAccs() {
+
     }
 
     public static List<Course> CourseList = new ArrayList<>();
-    public User() {
-        initialiseProf();
+    public static void initialisecourse() {
         Course DSA = new Course("DSA", 4, "Data Structures and Algorithms", "Prof. A", 50, "10:00-11:00");
         if(CourseList.size() == 0) {
             CourseList.add(DSA);

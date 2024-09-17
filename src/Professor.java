@@ -31,7 +31,6 @@ public class Professor extends User {
                 JOptionPane.showMessageDialog(null, "Superkey not accepted");
                 return false;
             }
-            JOptionPane.showMessageDialog(null, "Please create a new account to continue");
             String email = JOptionPane.showInputDialog(null, "Enter your email");
             String password = JOptionPane.showInputDialog(null, "Enter your password");
             Professor user = new Professor(email, password, "");
@@ -52,7 +51,7 @@ public class Professor extends User {
             JOptionPane.showMessageDialog(null, "Please login to continue");
             String email = JOptionPane.showInputDialog(null, "Enter your email");
             String password = JOptionPane.showInputDialog(null, "Enter your password");
-            User user = new User(email, password);
+            Professor user = new Professor(email, password,"");
             for (int i = 0; i < User.Professors.size(); i++) {
                 if (User.Professors.get(i).email.equals(email) && User.Professors.get(i).password.equals(password)) {
                     JOptionPane.showMessageDialog(null, "Login successful");
@@ -137,6 +136,12 @@ public class Professor extends User {
                 return;
 
         }
+    }
+
+    public static void initaliseAccs() {
+        Professors.add(new Professor("sak", "sak", "DSA"));
+        Professors.add(new Professor("prof2", "prof2", "CSA"));
+        Professors.add(new Professor("prof3", "prof3", ""));
     }
 }
 

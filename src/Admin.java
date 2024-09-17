@@ -42,8 +42,6 @@ public class Admin extends User{
             JOptionPane.showMessageDialog(null, "Please create a new account to continue");
             String email = JOptionPane.showInputDialog(null,"Enter your email");
             String password = JOptionPane.showInputDialog(null,"Enter your password");
-            //Admin user = new User(email, password);
-            //User.Professors.put(email, password);
             JOptionPane.showMessageDialog(null, "Account created successfully\nPlease login to continue");
             String email1 = JOptionPane.showInputDialog(null,"Enter your email");
             String password1 = JOptionPane.showInputDialog(null,"Enter your password");
@@ -62,7 +60,7 @@ public class Admin extends User{
             JOptionPane.showMessageDialog(null, "Please login to continue");
             String email = JOptionPane.showInputDialog(null,"Enter your email");
             String password = JOptionPane.showInputDialog(null,"Enter your password");
-            User user = new User(email, password);
+            Admin user = new Admin(email, password);
             for(int i =0;i<User.Admins.size();i++){
                 if(Admins.get(i).email.equals(email) && Admins.get(i).password.equals(password)){
                     JOptionPane.showMessageDialog(null, "Login successful");
@@ -82,7 +80,7 @@ public class Admin extends User{
 
     public static void adminMenu(Admin admin){
         while(true){
-            JOptionPane.showMessageDialog(null, "Please select an option\n (1)View Course\n (2)Add Course or Delete Course\n (3)Edit Student Details\n (4)Assign Professor to Course\n (5)Exit");
+            JOptionPane.showMessageDialog(null, "Please select an option\n (1)View Course\n (2)Add Course or Delete Course\n (3)Edit Student Details\n (4)Assign Professor to Course\n (5)Handle Complaints \n(6)Exit");
             int choice = Integer.parseInt(JOptionPane.showInputDialog(null,"Enter your choice"));
             if(choice == 1){
                 print_course();
@@ -214,13 +212,49 @@ public class Admin extends User{
                 }
             }
             else if(choice == 5){
+                String stringmaker = " ";
+                for(int i = 0;i<Complaints.size();i++){
+                    stringmaker+= "Complaint ID: "+Complaints.get(i).Complaint_Code+"\nComplaint: "+Complaints.get(i).Complaint+"\nStatus: "+Complaints.get(i).show_status;
+                    stringmaker+= "\n======================================================================\n";
+                }
+                JOptionPane.showMessageDialog(null, stringmaker, "Complaints", JOptionPane.INFORMATION_MESSAGE);
+                JOptionPane.showMessageDialog(null, "Please select an option\n (1)Change Status\n (2)Exit");
+                int choice1 = Integer.parseInt(JOptionPane.showInputDialog(null,"Enter your choice"));
+                if(choice1 == 1){
+                    int Complaint_Code = Integer.parseInt(JOptionPane.showInputDialog(null,"Enter the Complaint Code"));
+                    int new_status = JOptionPane.showOptionDialog(null,"Choose the new status","Status",JOptionPane.DEFAULT_OPTION,JOptionPane.INFORMATION_MESSAGE,null,new String[]{"Pending","Resolved"},null);
+                    for(int i = 0;i<Complaints.size();i++){
+                        if(Complaints.get(i).Complaint_Code == Complaint_Code){
+                            if(new_status == 0){
+                                Complaints.get(i).status = false;
+                                Complaints.get(i).show_status = "Pending";
+                            }
+                            else if(new_status == 1){
+                                Complaints.get(i).status = true;
+                                Complaints.get(i).show_status = "Resolved";
+                            }
+                            JOptionPane.showMessageDialog(null, "Status updated successfully");
+                            break;
+                        }
+                    }
+                }
+                else if(choice1 == 2){
+                    return;
+                }
+                else {
+                    JOptionPane.showMessageDialog(null, "Invalid choice");
+                }
+            }
+            else if(choice == 6){
                 JOptionPane.showMessageDialog(null, "Exiting Admin Menu");
                 return;
             }
-            else {
-                JOptionPane.showMessageDialog(null, "Invalid choice");
+            else { JOptionPane.showMessageDialog(null, "Invalid choice");
             }
         }
     }
-}
 
+    public static void initaliseAccs() {
+        Admins.add(new Admin("admin", "admin"));
+    }
+}

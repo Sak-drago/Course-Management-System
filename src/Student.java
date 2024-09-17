@@ -8,7 +8,7 @@ public class Student extends User {
     public static List<Course> courses = new ArrayList<>();
     public String email;
     public String password;
-    private static Map<Course, Integer> Course_grades;
+    public String student_name;
     int Credits;
     private static int max_credits = 20;
     private String schedule;
@@ -49,7 +49,7 @@ public class Student extends User {
             JOptionPane.showMessageDialog(null, "Please login to continue");
             String email = JOptionPane.showInputDialog(null,"Enter your email");
             String password = JOptionPane.showInputDialog(null,"Enter your password");
-            User user = new User(email, password);
+            Student user = new Student(email, password);
             for(int i =0;i<User.Students.size();i++){
                 if(User.Students.get(i).email.equals(email) && User.Students.get(i).password.equals(password)){
                     JOptionPane.showMessageDialog(null, "Login successful");
@@ -70,7 +70,7 @@ public class Student extends User {
     public static void studentMenu(Student student){
         JOptionPane.showMessageDialog(null, "Welcome Student");
         while(true){
-            JOptionPane.showMessageDialog(null, "Please select if you want to\n (1) View Courses\n (2) View Grades\n (3) Register for a course\n (4) Drop a course\n (5) View Schedule\n (6) Submit Complaint\n (7) Logout");
+            JOptionPane.showMessageDialog(null, "Please select if you want to\n (1) View Courses\n (2) View Grades\n (3) Register for a course\n (4) Drop a course\n (5) View Schedule\n (6) Complaint Portal\n (7) Logout");
             int option = Integer.parseInt(JOptionPane.showInputDialog(null,"Enter your choice"));
             if(option == 1){
                 view_registered_courses();
@@ -88,7 +88,7 @@ public class Student extends User {
                 view_schedule();
             }
             else if(option == 6){
-                submit_complaint();
+                student.submit_complaint();
             }
             else if(option == 7){
                 JOptionPane.showMessageDialog(null, "Logout successful");
@@ -137,7 +137,7 @@ public class Student extends User {
     public static void view_grades(){
         String stringmaker = "";
         for(int i = 0; i<courses.size();i++){
-            stringmaker+= "Course Code: "+courses.get(i).CCode+"\nCourse Name: "+courses.get(i).Course_name+"\nGrade: "+Course_grades.get(courses.get(i));
+            stringmaker+= "Course Code: "+courses.get(i).CCode+"\nCourse Name: "+courses.get(i).Course_name+"\nGrade: "+courses.get(i).Course_grade;
             stringmaker+= "\n======================================================================\n";
         }
         stringmaker+= "CGPA: "+CGPA;
@@ -153,7 +153,7 @@ public class Student extends User {
         JOptionPane.showMessageDialog(null, stringmaker);
     }
 
-    public static void submit_complaint(){
+    public void submit_complaint(){
         List<String> options = Arrays.asList("Submit Complaint", "View Status", "Exit");
         int choice = JOptionPane.showOptionDialog(null,"Choose an option", "Complaint Box", JOptionPane.DEFAULT_OPTION,JOptionPane.INFORMATION_MESSAGE, null, options.toArray(), null);
         if(choice == 0) {
@@ -164,8 +164,10 @@ public class Student extends User {
         else if(choice == 1){
             String stringmaker = "";
             for(int i = 0; i<Complaints.size();i++){
-                stringmaker+= "Complaint ID: "+Complaints.get(i).Complaint_Code+"\nComplaint: "+Complaints.get(i).Complaint+"\nStatus: "+Complaints.get(i).show_status;
-                stringmaker+= "\n======================================================================\n";
+                if(Complaints.get(i).person.equals(User.email)){
+                    stringmaker+= "Complaint ID: "+Complaints.get(i).Complaint_Code+"\nComplaint: "+Complaints.get(i).Complaint+"\nStatus: "+Complaints.get(i).show_status;
+                    stringmaker+= "\n======================================================================\n";
+                }
             }
             JOptionPane.showMessageDialog(null, stringmaker);
         }
@@ -175,5 +177,9 @@ public class Student extends User {
         else{
            JOptionPane.showMessageDialog(null, "Invalid choice");
         }
+    }
+    public static void initaliseAccs() {
+        Students.add(new Student("sak", "sak"));
+        Students.add(new Student("rishi", "rishi"));
     }
 }

@@ -6,14 +6,16 @@ public class Main {
         Student student = new Student("email", "password");
         Professor professor = new Professor("email", "password", "code");
         Admin admin = new Admin("email", "password");
-
+        Admin.initaliseAccs();
+        Student.initaliseAccs();
+        Professor.initaliseAccs();
+        User.initialisecourse();
         while (true) {
-            JOptionPane.showMessageDialog(null, "Please select if you are\n (1)Student\n (2)Professor\n (3)Admin\n (4)Exit");
-            int choice = Integer.parseInt(JOptionPane.showInputDialog(null, "Enter your choice"));
+            int choice = JOptionPane.showOptionDialog(null, "Choose the type of user", "CMS", JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null, new String[]{"Student", "Professor", "Admin", "Exit"}, null);
             boolean flag = false;
-            if (choice == 1) {
+            if (choice == 0) {
                 JOptionPane.showMessageDialog(null, "Student Login");
-                User user = new User();
+                Student user = new Student("email", "password");
                 flag = student.s_login();
                 if (!flag) {
                     JOptionPane.showMessageDialog(null, "Login Error");
@@ -22,9 +24,9 @@ public class Main {
                 }
 
                 Student.studentMenu(student);
-            } else if (choice == 2) {
+            } else if (choice == 1) {
                 JOptionPane.showMessageDialog(null, "Professor Login");
-                User user = new User();
+                Professor user = new Professor("email", "password", "code");
                 flag = professor.p_login();
                 if (!flag) {
                     JOptionPane.showMessageDialog(null, "Login Error");
@@ -32,9 +34,9 @@ public class Main {
                     return;
                 }
                 Professor.professorMenu(professor);
-            } else if (choice == 3) {
+            } else if (choice == 2) {
                 JOptionPane.showMessageDialog(null, "Admin Login");
-                User user = new User();
+                Admin user = new Admin("email", "password");
                 flag = admin.a_login();
                 if (!flag) {
                     JOptionPane.showMessageDialog(null, "Login Error");
@@ -42,7 +44,7 @@ public class Main {
                     return;
                 }
                 Admin.adminMenu(admin);
-            } else if (choice == 4) {
+            } else if (choice == 3) {
                 JOptionPane.showMessageDialog(null, "Exiting CMS");
                 return;
             } else {
