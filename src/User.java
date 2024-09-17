@@ -10,7 +10,7 @@ public class User {
     public static List<Student> Students = new ArrayList<>();
     public static List<Professor> Professors = new ArrayList<>();
     public static List<Admin> Admins = new ArrayList<>();
-    public List<Complaints> Complaints = new ArrayList<>();
+    public static List<Complaints> Complaints = new ArrayList<>();
 
     public User(String email, String password) {
         this.email = email;

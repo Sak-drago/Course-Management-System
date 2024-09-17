@@ -1,5 +1,6 @@
 import javax.swing.*;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
@@ -87,7 +88,7 @@ public class Student extends User {
                 view_schedule();
             }
             else if(option == 6){
-                //student.submit_complaint();
+                submit_complaint();
             }
             else if(option == 7){
                 JOptionPane.showMessageDialog(null, "Logout successful");
@@ -150,5 +151,29 @@ public class Student extends User {
             stringmaker+= "\n======================================================================\n";
         }
         JOptionPane.showMessageDialog(null, stringmaker);
+    }
+
+    public static void submit_complaint(){
+        List<String> options = Arrays.asList("Submit Complaint", "View Status", "Exit");
+        int choice = JOptionPane.showOptionDialog(null,"Choose an option", "Complaint Box", JOptionPane.DEFAULT_OPTION,JOptionPane.INFORMATION_MESSAGE, null, options.toArray(), null);
+        if(choice == 0) {
+            String complaint = JOptionPane.showInputDialog(null, "Enter your complaint");
+            Complaints.add(new Complaints(Complaints.size() + 1, complaint));
+            JOptionPane.showMessageDialog(null, "Complaint submitted successfully");
+        }
+        else if(choice == 1){
+            String stringmaker = "";
+            for(int i = 0; i<Complaints.size();i++){
+                stringmaker+= "Complaint ID: "+Complaints.get(i).Complaint_Code+"\nComplaint: "+Complaints.get(i).Complaint+"\nStatus: "+Complaints.get(i).show_status;
+                stringmaker+= "\n======================================================================\n";
+            }
+            JOptionPane.showMessageDialog(null, stringmaker);
+        }
+        else if(choice == 2) {
+            return;
+        }
+        else{
+           JOptionPane.showMessageDialog(null, "Invalid choice");
+        }
     }
 }
