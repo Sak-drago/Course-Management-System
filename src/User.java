@@ -30,7 +30,17 @@ abstract public class User {
             Course CSA = new Course("CSA", 4, "Cute Structures and Algorithms", "Prof. B", 50, "12:00-13:00");
             CourseList.add(CSA);
         }
+        if(CourseList.size()==2){
+            Course OOP = new Course("OOP", 4, "Object Oriented Programming", "Prof. C", 50, "14:00-15:00");
+            CourseList.add(OOP);
+        }
+        if(CourseList.size()==3){
+            Course DBMS = new Course("DBMS", 4, "Database Management Systems", "Prof. D", 50, "16:00-17:00");
+            CourseList.add(DBMS);
+        }
+        if(CourseList.size()==4){
+            Course OS = new Course("OS", 4, "Operating Systems", "Prof. E", 50, "18:00-19:00");
+            CourseList.add(OS);
+        }
     }
-
-
 }
