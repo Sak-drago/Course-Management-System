@@ -10,6 +10,7 @@ public class User {
     public static List<Student> Students = new ArrayList<>();
     public static List<Professor> Professors = new ArrayList<>();
     public static List<Admin> Admins = new ArrayList<>();
+    public List<Complaints> Complaints = new ArrayList<>();
 
     public User(String email, String password) {
         this.email = email;
@@ -29,9 +30,13 @@ public class User {
     public User() {
         initialiseProf();
         Course DSA = new Course("DSA", 4, "Data Structures and Algorithms", "Prof. A", 50, "10:00-11:00");
-        CourseList.add(DSA);
-        Course CSA = new Course("CSA", 4, "Data Structures and Algorithms", "Prof. A", 50, "10:00-11:00");
-        CourseList.add(CSA);
+        if(CourseList.size() == 0) {
+            CourseList.add(DSA);
+        }
+        if(CourseList.size()==1) {
+            Course CSA = new Course("CSA", 4, "Cute Structures and Algorithms", "Prof. B", 50, "12:00-13:00");
+            CourseList.add(CSA);
+        }
     }
 
 

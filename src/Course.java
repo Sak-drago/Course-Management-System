@@ -5,6 +5,7 @@ public class Course{
     public String CCode ;
     public String Syllabus;
     public int Credits ;
+    public String Course_grade;
     public String Course_name ;
     public String Professor_name ;
     //private String[] prerequisites;

@@ -4,14 +4,14 @@ import java.util.List;
 import java.util.Map;
 
 public class Student extends User {
-    private static List<Course> courses = new ArrayList<>();
+    public static List<Course> courses = new ArrayList<>();
     public String email;
     public String password;
-    private Map<Course, Integer> course_grades;
-    private int credits;
+    private static Map<Course, Integer> Course_grades;
+    int Credits;
     private static int max_credits = 20;
     private String schedule;
-    private String CGPA;
+    static String CGPA;
 
     public Student(String email, String password) {
         super(email, password);
@@ -75,7 +75,7 @@ public class Student extends User {
                 view_registered_courses();
             }
             else if(option == 2){
-                //view_grades();
+                view_grades();
             }
             else if(option == 3){
                 register_course();
@@ -84,7 +84,7 @@ public class Student extends User {
                 drop_course();
             }
             else if(option == 5){
-                //student.view_schedule();
+                view_schedule();
             }
             else if(option == 6){
                 //student.submit_complaint();
@@ -104,7 +104,7 @@ public class Student extends User {
             courses_list = courses_list + "Course Code: "+CourseList.get(i).CCode+"\nCourse Name: "+CourseList.get(i).Course_name+"\nCredits: "+CourseList.get(i).Credits+"\nProfessor: "+CourseList.get(i).Professor_name+"\nEnrollment Limit: "+CourseList.get(i).enrollement_limit+"\nClass Timings: "+CourseList.get(i).class_timings;
             courses_list = courses_list + "\n======================================================================\n";
         }
-        JOptionPane.showMessageDialog(null, courses_list);
+        JOptionPane.showMessageDialog(null, courses_list,"Courses",JOptionPane.INFORMATION_MESSAGE);
     }
 
     public static void register_course(){
@@ -122,7 +122,6 @@ public class Student extends User {
     }
 
     public static void drop_course(){
-        JOptionPane.showMessageDialog(null, "Courses registered");
         view_registered_courses();
         String course_name = JOptionPane.showInputDialog(null,"Enter the course code of the course name you want to drop");
         for(Course course : courses){
@@ -132,5 +131,24 @@ public class Student extends User {
                 break;
             }
         }
+    }
+
+    public static void view_grades(){
+        String stringmaker = "";
+        for(int i = 0; i<courses.size();i++){
+            stringmaker+= "Course Code: "+courses.get(i).CCode+"\nCourse Name: "+courses.get(i).Course_name+"\nGrade: "+Course_grades.get(courses.get(i));
+            stringmaker+= "\n======================================================================\n";
+        }
+        stringmaker+= "CGPA: "+CGPA;
+        JOptionPane.showMessageDialog(null, stringmaker);
+    }
+
+    public static void view_schedule(){
+        String stringmaker = "";
+        for(int i =0;i<courses.size();i++){
+            stringmaker+= "Course Code: "+courses.get(i).CCode+" => Class Timings: "+courses.get(i).class_timings;
+            stringmaker+= "\n======================================================================\n";
+        }
+        JOptionPane.showMessageDialog(null, stringmaker);
     }
 }

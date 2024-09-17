@@ -63,7 +63,7 @@ public class Admin extends User{
             String email = JOptionPane.showInputDialog(null,"Enter your email");
             String password = JOptionPane.showInputDialog(null,"Enter your password");
             User user = new User(email, password);
-            for(int i =0;i<User.Professors.size();i++){
+            for(int i =0;i<User.Admins.size();i++){
                 if(Admins.get(i).email.equals(email) && Admins.get(i).password.equals(password)){
                     JOptionPane.showMessageDialog(null, "Login successful");
                     flag = true;
@@ -113,14 +113,92 @@ public class Admin extends User{
             }
             else if(choice == 3){
                 String email = JOptionPane.showInputDialog(null,"Enter the Student Email");
-                for(int i = 0; i<Student.Students.size();i++){
-                    if(Student.Students.get(i).email.equals(email)){
-                        String new_email = JOptionPane.showInputDialog(null,"Enter the new Email");
-                        String new_password = JOptionPane.showInputDialog(null,"Enter the new Password");
-                        Student.Students.get(i).email = new_email;
-                        Student.Students.get(i).password = new_password;
-                        JOptionPane.showMessageDialog(null, "Student details updated successfully");
-                        break;
+                for(int i = 0; i<Students.size();i++){
+                    if(Students.get(i).email.equals(email)){
+                        JOptionPane.showMessageDialog(null, "What do you want to edit?\n (1) Email\n (2) Password\n (3) Course Grade\n (4) Credits\n (5) CGPA\n (6) Courses\n (7) Exit");
+                        int choice2 = Integer.parseInt(JOptionPane.showInputDialog(null,"Enter your choice"));
+                        if(choice2 == 1){
+                            String new_email = JOptionPane.showInputDialog(null,"Enter the new Email");
+                            Students.get(i).email = new_email;
+                            JOptionPane.showMessageDialog(null, "Student details updated successfully");
+                        }
+                        else if(choice2 == 2){
+                            String new_password = JOptionPane.showInputDialog(null,"Enter the new Password");
+                            Students.get(i).password = new_password;
+                            JOptionPane.showMessageDialog(null, "Student details updated successfully");
+                        }
+                        else if(choice2 == 3){
+                            String select_course = JOptionPane.showInputDialog(null,"Which Course do you want to change it for?");
+                            for(int j = 0; j<Student.courses.size();j++){
+                                if(Student.courses.get(j).CCode.equals(select_course)){
+                                    String new_grade = JOptionPane.showInputDialog(null,"Enter the new Grade");
+                                    Student.courses.get(j).Course_grade = new_grade;
+                                    JOptionPane.showMessageDialog(null, "Student details updated successfully");
+                                    break;
+                                }
+                            }
+                        }
+                        else if(choice2 == 4){
+                            int new_credits = Integer.parseInt(JOptionPane.showInputDialog(null,"Enter the new Credits"));
+                            Student.Students.get(i).Credits = new_credits;
+                            JOptionPane.showMessageDialog(null, "Student details updated successfully");
+                        }
+                        else if(choice2 == 5){
+                            String new_cgpa = JOptionPane.showInputDialog(null,"Enter the new CGPA");
+                            Student.Students.get(i).CGPA = new_cgpa;
+                            JOptionPane.showMessageDialog(null, "Student details updated successfully");
+                        }
+                        else if(choice2 == 6){
+                            JOptionPane.showMessageDialog(null, "Do you want to add or remove courses?\n (1) Add\n (2) Remove");
+                            int choice3 = Integer.parseInt(JOptionPane.showInputDialog(null,"Enter your choice"));
+                            String stringmaker = "The current courses that the student is enrolled in are: \n";
+                            for(int j =0;j<Student.CourseList.size();j++){
+                                stringmaker+= "Course Code: "+Student.CourseList.get(j).CCode;
+                                stringmaker+= '\n';
+                            }
+                            JOptionPane.showMessageDialog(null, stringmaker);
+                            if(choice3 == 1) {
+                                String new_courses = JOptionPane.showInputDialog(null, "Enter the new Courses");
+                                if(Student.courses.contains(new_courses)){
+                                    JOptionPane.showMessageDialog(null, "Course already exists");
+                                }
+                                else {
+                                    for(int k = 0;k<CourseList.size();k++){
+                                        if(CourseList.get(k).CCode.equals(new_courses)){
+                                            Student.courses.add(CourseList.get(k));
+                                            JOptionPane.showMessageDialog(null, "Student details updated successfully");
+                                            break;
+                                        }
+                                        else if(!CourseList.get(i).CCode.equals(new_courses)){
+                                            JOptionPane.showMessageDialog(null, "Course does not exist");
+                                            break;
+                                        }
+                                    }
+                                }
+                            }
+                            else if(choice3 == 2){
+                                String remove_courses = JOptionPane.showInputDialog(null, "Enter the Course to remove");
+                                for(int k = 0;k<Student.CourseList.size();k++){
+                                    if(Student.CourseList.get(k).CCode.equals(remove_courses)){
+                                        Student.CourseList.remove(k);
+                                        JOptionPane.showMessageDialog(null, "Student details updated successfully");
+                                        break;
+                                    }
+                                    else if(!CourseList.get(i).CCode.equals(remove_courses)){
+                                        JOptionPane.showMessageDialog(null, "Course does not exist");
+                                        break;
+                                    }
+                                }
+                            }
+                        }
+                        else if(choice2 == 7){
+                            JOptionPane.showMessageDialog(null, "Exiting Student Menu");
+                            break;
+                        }
+                        else {
+                            JOptionPane.showMessageDialog(null, "Invalid choice");
+                            break;
+                        }
                     }
                 }
             }

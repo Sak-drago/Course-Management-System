@@ -7,14 +7,14 @@ public class Professor extends User {
     public String email;
     public String password;
     public String Course_name;
-    public static String CourseCode;
+    public String CourseCode;
     private String class_timings;
 
     public Professor(String email, String password, String CourseCode) {
         super(email, password);
         this.email = email;
         this.password = password;
-        Professor.CourseCode = CourseCode;
+        this.CourseCode = CourseCode;
     }
 
     public boolean p_login() {
@@ -95,8 +95,6 @@ public class Professor extends User {
                 }
                 JOptionPane.showMessageDialog(null, students_list.toString());
                 break;
-            } else {
-                JOptionPane.showMessageDialog(null, "Course Code Mismatch " + course.CCode + " and " + CourseCode);
             }
         }
     }
@@ -108,7 +106,7 @@ public class Professor extends User {
             if (course.CCode.equals(courseCode)) {
                 List<String> options = Arrays.asList("Class Timings", "Syllabus", "Credits");
                 int choice = JOptionPane.showOptionDialog(null, "What do you want to update?", "Update Course",
-                        JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null, options.toArray(), options.get(0));
+                        JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null, options.toArray(), null);
 
                 switch (choice) {
                     case 0:
