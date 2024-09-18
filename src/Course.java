@@ -12,8 +12,9 @@ public class Course{
     public int enrollement_limit ;
     public String class_timings ;
     static List<String> StudentList = new ArrayList<>();
+    public List<String> preRequisites;
 
-    public Course(String CCode, int Cred, String name, String Professor_taking, int limit, String timings){
+    public Course(String CCode, int Cred, String name, String Professor_taking, int limit, String timings, List<String> preRequisites){
         this.CCode = CCode;
         this.Credits = Cred;
         this.Course_name =  name;
@@ -21,6 +22,7 @@ public class Course{
         //private String[] prerequisites;
         this.enrollement_limit= limit;
         this.class_timings = timings;
+        this.preRequisites = preRequisites;
 
     }
 }

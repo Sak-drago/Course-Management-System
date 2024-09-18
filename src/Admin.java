@@ -17,6 +17,10 @@ public class Admin extends User{
         String courses_list = "";
         for(int i = 0; i<CourseList.size();i++){
             courses_list = courses_list + "Course Code: "+CourseList.get(i).CCode+"\nCourse Name: "+CourseList.get(i).Course_name+"\nCredits: "+CourseList.get(i).Credits+"\nProfessor: "+CourseList.get(i).Professor_name+"\nEnrollment Limit: "+CourseList.get(i).enrollement_limit+"\nClass Timings: "+CourseList.get(i).class_timings;
+            courses_list = courses_list + "\nPreRequisites: ";
+            for(int j = 0;j<CourseList.get(i).preRequisites.size();j++){
+                courses_list = courses_list + CourseList.get(i).preRequisites.get(j);
+            }
             courses_list = courses_list + "\n======================================================================\n";
         }
         JOptionPane.showMessageDialog(null, courses_list);
@@ -94,7 +98,13 @@ public class Admin extends User{
                     String Professor_name = JOptionPane.showInputDialog(null,"Enter the Professor Name");
                     int enrollement_limit = Integer.parseInt(JOptionPane.showInputDialog(null,"Enter the Enrollment Limit"));
                     String class_timings = JOptionPane.showInputDialog(null,"Enter the Class Timings");
-                    Course course = new Course(CCode, Credits, Course_name, Professor_name, enrollement_limit, class_timings);
+                    List<String> preReq = new ArrayList<>();
+                    int number_of_preReq = Integer.parseInt(JOptionPane.showInputDialog(null,"Enter the number of PreRequisites"));
+                    for(int i = 0;i<number_of_preReq;i++){
+                        String preReq_course = JOptionPane.showInputDialog(null,"Enter the PreRequisite Course");
+                        preReq.add(preReq_course);
+                    }
+                    Course course = new Course(CCode, Credits, Course_name, Professor_name, enrollement_limit, class_timings, preReq);
                     CourseList.add(course);
                 }
                 else if(choice1 == 2){

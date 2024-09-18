@@ -113,15 +113,33 @@ public class Student extends User {
         }
     }
 
-    public static void register_course(){
+    public static void register_course() {
         JOptionPane.showMessageDialog(null, "Courses available for registration");
         Admin.print_course();
-        String course_name = JOptionPane.showInputDialog(null,"Enter the course code for the course you want to register for");
-        for(Course course : CourseList){
-            if(course.CCode.equals(course_name)){
-                courses.add(course);
-                Course.StudentList.add(User.email);
-                JOptionPane.showMessageDialog(null, "Course registered successfully");
+        String course_name = JOptionPane.showInputDialog(null, "Enter the course code for the course you want to register for");
+        for (Course course : CourseList) {
+            if (course.CCode.equals(course_name)) {
+                boolean prerequisitesMet = true;
+                for (String prerequisite : course.preRequisites) {
+                    boolean hasPrerequisite = false;
+                    for (Course completedCourse : courses) {
+                        if (completedCourse.CCode.equals(prerequisite)) {
+                            hasPrerequisite = true;
+                            break;
+                        }
+                    }
+                    if (!hasPrerequisite) {
+                        prerequisitesMet = false;
+                        break;
+                    }
+                }
+                if (prerequisitesMet) {
+                    courses.add(course);
+                    Course.StudentList.add(User.email);
+                    JOptionPane.showMessageDialog(null, "Course registered successfully");
+                } else {
+                    JOptionPane.showMessageDialog(null, "You do not meet the prerequisites for this course");
+                }
                 break;
             }
         }
@@ -133,6 +151,7 @@ public class Student extends User {
         for(Course course : courses){
             if(course.CCode.equals(course_name)){
                 courses.remove(course);
+                Course.StudentList.remove(User.email);
                 JOptionPane.showMessageDialog(null, "Course dropped successfully");
                 break;
             }
