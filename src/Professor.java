@@ -72,7 +72,7 @@ public class Professor extends User {
             JOptionPane.showMessageDialog(null, "Please select an option\n (1)Edit Course\n (2)View Student List of a Course\n (3)Logout");
             int choice = Integer.parseInt(JOptionPane.showInputDialog(null, "Enter your choice"));
             if (choice == 1) {
-                edit_course();
+                professor.edit_course();
             } else if (choice == 2) {
                 view_student_list_course();
             } else if (choice == 3) {
@@ -99,11 +99,11 @@ public class Professor extends User {
     }
 
 
-    public static void edit_course() {
+    public void edit_course() {
         String courseCode = JOptionPane.showInputDialog(null, "Enter the course code of the course you want to edit");
         try{
         for (Course course : User.CourseList) {
-            if (course.CCode.equals(courseCode)) {
+            if (course.CCode.equals(courseCode) && this.CourseCode.equals(courseCode)) {
                 List<String> options = Arrays.asList("Class Timings", "Syllabus", "Credits");
                 int choice = JOptionPane.showOptionDialog(null, "What do you want to update?", "Update Course",
                         JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null, options.toArray(), null);

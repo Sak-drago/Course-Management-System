@@ -5,14 +5,15 @@ import java.util.List;
 import java.util.Map;
 
 public class Student extends User {
-    public static List<Course> courses = new ArrayList<>();
+    public List<Course> courses = new ArrayList<>();
+    public List<Course> completed_courses = new ArrayList<>();
     public String email;
     public String password;
     public String student_name;
-    int Credits;
+    public int Credits;
     private static int max_credits = 20;
     private String schedule;
-    static String CGPA;
+    String CGPA;
 
     public Student(String email, String password) {
         super(email, password);
@@ -20,100 +21,89 @@ public class Student extends User {
         this.password = password;
     }
 
-    public boolean login(){
+    public boolean login() {
         JOptionPane.showMessageDialog(null, "Please create or login to continue\n Choose 1 for creating a new account\n Choose 2 for login");
-        int choice = Integer.parseInt(JOptionPane.showInputDialog(null,"Enter your choice"));
+        int choice = Integer.parseInt(JOptionPane.showInputDialog(null, "Enter your choice"));
         boolean flag = false;
 
-        if(choice == 1) {
+        if (choice == 1) {
             JOptionPane.showMessageDialog(null, "Please create a new account to continue");
-            String email = JOptionPane.showInputDialog(null,"Enter your email");
-            String password = JOptionPane.showInputDialog(null,"Enter your password");
+            String email = JOptionPane.showInputDialog(null, "Enter your email");
+            String password = JOptionPane.showInputDialog(null, "Enter your password");
             Student user = new Student(email, password);
             Students.add(user);
             JOptionPane.showMessageDialog(null, "Account created successfully\nPlease login to continue");
-            String email1 = JOptionPane.showInputDialog(null,"Enter your email");
-            String password1 = JOptionPane.showInputDialog(null,"Enter your password");
-            for(int i =0;i<User.Students.size();i++){
-                if(User.Students.get(i).email.equals(email1) && User.Students.get(i).password.equals(password1)){
+            String email1 = JOptionPane.showInputDialog(null, "Enter your email");
+            String password1 = JOptionPane.showInputDialog(null, "Enter your password");
+            for (int i = 0; i < User.Students.size(); i++) {
+                if (User.Students.get(i).email.equals(email1) && User.Students.get(i).password.equals(password1)) {
                     JOptionPane.showMessageDialog(null, "Login successful");
                     flag = true;
                     break;
-                }
-                else {
+                } else {
                     continue;
                 }
             }
-        }
-        else if(choice == 2) {
+        } else if (choice == 2) {
             JOptionPane.showMessageDialog(null, "Please login to continue");
-            String email = JOptionPane.showInputDialog(null,"Enter your email");
-            String password = JOptionPane.showInputDialog(null,"Enter your password");
+            String email = JOptionPane.showInputDialog(null, "Enter your email");
+            String password = JOptionPane.showInputDialog(null, "Enter your password");
             Student user = new Student(email, password);
-            for(int i =0;i<User.Students.size();i++){
-                if(User.Students.get(i).email.equals(email) && User.Students.get(i).password.equals(password)){
+            for (int i = 0; i < User.Students.size(); i++) {
+                if (User.Students.get(i).email.equals(email) && User.Students.get(i).password.equals(password)) {
                     JOptionPane.showMessageDialog(null, "Login successful");
                     flag = true;
                     break;
-                }
-                else {
+                } else {
                     continue;
                 }
             }
-        }
-        else {
+        } else {
             JOptionPane.showMessageDialog(null, "Invalid choice");
         }
         return flag;
     }
 
-    public static void studentMenu(Student student){
+    public static void studentMenu(Student student) {
         JOptionPane.showMessageDialog(null, "Welcome Student");
-        while(true){
+        while (true) {
             JOptionPane.showMessageDialog(null, "Please select if you want to\n (1) View Courses\n (2) View Grades\n (3) Register for a course\n (4) Drop a course\n (5) View Schedule\n (6) Complaint Portal\n (7) Logout");
-            int option = Integer.parseInt(JOptionPane.showInputDialog(null,"Enter your choice"));
-            if(option == 1){
-                view_registered_courses();
-            }
-            else if(option == 2){
-                view_grades();
-            }
-            else if(option == 3){
-                register_course();
-            }
-            else if(option == 4){
-                drop_course();
-            }
-            else if(option == 5){
-                view_schedule();
-            }
-            else if(option == 6){
+            int option = Integer.parseInt(JOptionPane.showInputDialog(null, "Enter your choice"));
+            if (option == 1) {
+                student.view_registered_courses();
+            } else if (option == 2) {
+                student.view_grades();
+            } else if (option == 3) {
+                student.register_course();
+            } else if (option == 4) {
+                student.drop_course();
+            } else if (option == 5) {
+                student.view_schedule();
+            } else if (option == 6) {
                 student.submit_complaint();
-            }
-            else if(option == 7){
+            } else if (option == 7) {
                 JOptionPane.showMessageDialog(null, "Logout successful");
                 break;
-            }
-            else {
+            } else {
                 JOptionPane.showMessageDialog(null, "Invalid choice");
             }
         }
     }
-    public static void view_registered_courses() {
+
+    public void view_registered_courses() {
         String courses_list = "";
         try {
-            for (int i = 0; i < courses.size(); i++) {
+            for (int i = 0; i < this.courses.size(); i++) {
                 courses_list = courses_list + "Course Code: " + CourseList.get(i).CCode + "\nCourse Name: " + CourseList.get(i).Course_name + "\nCredits: " + CourseList.get(i).Credits + "\nProfessor: " + CourseList.get(i).Professor_name + "\nEnrollment Limit: " + CourseList.get(i).enrollement_limit + "\nClass Timings: " + CourseList.get(i).class_timings;
                 courses_list = courses_list + "\n======================================================================\n";
             }
-        JOptionPane.showMessageDialog(null, courses_list,"Courses",JOptionPane.INFORMATION_MESSAGE);
-        }
-        catch(NullPointerException e){
+            JOptionPane.showMessageDialog(null, courses_list, "Courses", JOptionPane.INFORMATION_MESSAGE);
+        } catch (NullPointerException e) {
             JOptionPane.showMessageDialog(null, "No courses registered");
         }
     }
 
-    public static void register_course() {
+    public void register_course() {
         JOptionPane.showMessageDialog(null, "Courses available for registration");
         Admin.print_course();
         String course_name = JOptionPane.showInputDialog(null, "Enter the course code for the course you want to register for");
@@ -134,8 +124,16 @@ public class Student extends User {
                     }
                 }
                 if (prerequisitesMet) {
+                    if (this.Credits < 20 && course.Credits + this.Credits <= 20) {
+                        courses.add(course);
+                        Course.StudentList.add(User.email);
+                        this.Credits += course.Credits;
+                    } else {
+                        JOptionPane.showMessageDialog(null, "You have exceeded the maximum credit limit");
+                    }
                     courses.add(course);
                     Course.StudentList.add(User.email);
+                    this.Credits += course.Credits;
                     JOptionPane.showMessageDialog(null, "Course registered successfully");
                 } else {
                     JOptionPane.showMessageDialog(null, "You do not meet the prerequisites for this course");
@@ -145,11 +143,11 @@ public class Student extends User {
         }
     }
 
-    public static void drop_course(){
+    public void drop_course() {
         view_registered_courses();
-        String course_name = JOptionPane.showInputDialog(null,"Enter the course code of the course name you want to drop");
-        for(Course course : courses){
-            if(course.CCode.equals(course_name)){
+        String course_name = JOptionPane.showInputDialog(null, "Enter the course code of the course name you want to drop");
+        for (Course course : this.courses) {
+            if (course.CCode.equals(course_name)) {
                 courses.remove(course);
                 Course.StudentList.remove(User.email);
                 JOptionPane.showMessageDialog(null, "Course dropped successfully");
@@ -158,53 +156,64 @@ public class Student extends User {
         }
     }
 
-    public static void view_grades(){
+    public void view_grades() {
         String stringmaker = "";
-        for(int i = 0; i<courses.size();i++){
-            stringmaker+= "Course Code: "+courses.get(i).CCode+"\nCourse Name: "+courses.get(i).Course_name+"\nGrade: "+courses.get(i).Course_grade;
-            stringmaker+= "\n======================================================================\n";
+        for (int i = 0; i < courses.size(); i++) {
+            stringmaker += "Course Code: " + courses.get(i).CCode + "\nCourse Name: " + courses.get(i).Course_name + "\nGrade: " + courses.get(i).Course_grade;
+            stringmaker += "\n======================================================================\n";
         }
-        stringmaker+= "CGPA: "+CGPA;
+        stringmaker += "CGPA: " + this.CGPA;
         JOptionPane.showMessageDialog(null, stringmaker);
     }
 
-    public static void view_schedule(){
+    public void view_schedule() {
         String stringmaker = "";
-        for(int i =0;i<courses.size();i++){
-            stringmaker+= "Course Code: "+courses.get(i).CCode+" => Class Timings: "+courses.get(i).class_timings;
-            stringmaker+= "\n======================================================================\n";
+        for (int i = 0; i < this.courses.size(); i++) {
+            stringmaker += "Course Code: " + this.courses.get(i).CCode + " => Class Timings: " + this.courses.get(i).class_timings;
+            stringmaker += "\n======================================================================\n";
         }
         JOptionPane.showMessageDialog(null, stringmaker);
     }
 
-    public void submit_complaint(){
+    public void submit_complaint() {
         List<String> options = Arrays.asList("Submit Complaint", "View Status", "Exit");
-        int choice = JOptionPane.showOptionDialog(null,"Choose an option", "Complaint Box", JOptionPane.DEFAULT_OPTION,JOptionPane.INFORMATION_MESSAGE, null, options.toArray(), null);
-        if(choice == 0) {
+        int choice = JOptionPane.showOptionDialog(null, "Choose an option", "Complaint Box", JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null, options.toArray(), null);
+        if (choice == 0) {
             String complaint = JOptionPane.showInputDialog(null, "Enter your complaint");
             Complaints.add(new Complaints(Complaints.size() + 1, complaint, User.email));
             JOptionPane.showMessageDialog(null, "Complaint submitted successfully");
-        }
-        else if(choice == 1){
+        } else if (choice == 1) {
             String stringmaker = "";
-            for(int i = 0; i<Complaints.size();i++){
-                if(Complaints.get(i).person.equals(User.email)){
-                    stringmaker+= "Complaint ID: "+Complaints.get(i).Complaint_Code+"\nComplaint: "+Complaints.get(i).Complaint+"\nStatus: "+Complaints.get(i).show_status;
-                    stringmaker+= "\n======================================================================\n";
+            for (int i = 0; i < Complaints.size(); i++) {
+                if (Complaints.get(i).person.equals(User.email)) {
+                    stringmaker += "Complaint ID: " + Complaints.get(i).Complaint_Code + "\nComplaint: " + Complaints.get(i).Complaint + "\nStatus: " + Complaints.get(i).show_status;
+                    stringmaker += "\n======================================================================\n";
                 }
             }
             JOptionPane.showMessageDialog(null, stringmaker);
-        }
-        else if(choice == 2) {
+        } else if (choice == 2) {
             return;
-        }
-        else{
-           JOptionPane.showMessageDialog(null, "Invalid choice");
+        } else {
+            JOptionPane.showMessageDialog(null, "Invalid choice");
         }
     }
+
     public static void initaliseAccs() {
         Students.add(new Student("sak", "sak"));
         Students.add(new Student("rishi", "rishi"));
         Students.add(new Student("saksham", "saksham"));
     }
+
+    public void checkAndMoveGradedCourses() {
+        List<Course> toBeMoved = new ArrayList<>();
+        for (Course course : courses) {
+            if (course.Course_grade != null && !course.Course_grade.isEmpty()) {
+                toBeMoved.add(course);
+            }
+        }
+        courses.removeAll(toBeMoved);
+        completed_courses.addAll(toBeMoved);
+    }
+
 }
+
