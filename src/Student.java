@@ -127,18 +127,19 @@ public class Student extends User {
                 if (prerequisitesMet) {
                     if (this.Credits < 20 && course.Credits + this.Credits <= 20) {
                         courses.add(course);
-                        Course.StudentList.add(User.email);
+                        Course.StudentList.add(this.email);
                         this.Credits += course.Credits;
                     } else {
                         JOptionPane.showMessageDialog(null, "You have exceeded the maximum credit limit");
                     }
-                    courses.add(course);
-                    Course.StudentList.add(User.email);
-                    this.Credits += course.Credits;
-                    JOptionPane.showMessageDialog(null, "Course registered successfully");
+
                 } else {
                     JOptionPane.showMessageDialog(null, "You do not meet the prerequisites for this course");
                 }
+                courses.add(course);
+                Course.StudentList.add(User.email);
+                this.Credits += course.Credits;
+                JOptionPane.showMessageDialog(null, "Course registered successfully");
                 break;
             }
         }
