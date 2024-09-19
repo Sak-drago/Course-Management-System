@@ -23,11 +23,11 @@ abstract public class User {
 
     public static List<Course> CourseList = new ArrayList<>();
     public static void initialisecourse() {
-        Course DSA = new Course("DSA", 4, "Data Structures and Algorithms", "Prof. A", 50, "10:00-11:00", new ArrayList<>());
-        Course CSA = new Course("CSA", 4, "Cute Structures and Algorithms", "Prof. B", 50, "12:00-13:00", List.of("DSA"));
-        Course OOP = new Course("OOP", 4, "Object Oriented Programming", "Prof. C", 50, "14:00-15:00", List.of("DSA"));
-        Course DBMS = new Course("DBMS", 4, "Database Management Systems", "Prof. D", 50, "16:00-17:00", Arrays.asList("DSA", "OOP"));
-        Course OS = new Course("OS", 4, "Operating Systems", "Prof. E", 50, "18:00-19:00", Arrays.asList("CSA", "OOP"));
+        Course DSA = new Course("DSA", 4, "Data Structures and Algorithms", "Prof. A", 50, "10:00-11:00", new String[]{});
+        Course CSA = new Course("CSA", 4, "Cute Structures and Algorithms", "Prof. B", 50, "12:00-13:00", new String[]{"DSA"});
+        Course OOP = new Course("OOP", 4, "Object Oriented Programming", "Prof. C", 50, "14:00-15:00", new String[]{"DSA", "CSA"});
+        Course DBMS = new Course("DBMS", 4, "Database Management Systems", "Prof. D", 50, "16:00-17:00", new String[]{"DSA", "CSA", "OOP"});
+        Course OS = new Course("OS", 4, "Operating Systems", "Prof. E", 50, "18:00-19:00", new String[]{"DSA", "CSA", "OOP", "DBMS"});
 
         if (CourseList.size() == 0) {
             CourseList.add(DSA);

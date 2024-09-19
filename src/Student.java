@@ -136,10 +136,6 @@ public class Student extends User {
                 } else {
                     JOptionPane.showMessageDialog(null, "You do not meet the prerequisites for this course");
                 }
-                courses.add(course);
-                Course.StudentList.add(User.email);
-                this.Credits += course.Credits;
-                JOptionPane.showMessageDialog(null, "Course registered successfully");
                 break;
             }
         }
