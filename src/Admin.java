@@ -155,6 +155,11 @@ public class Admin extends User {
                                                 }
                                             }
                                             if (!allGraded) break;
+                                            if(allGraded){
+                                                String CurrentSem = student1.getCurrentSemester();
+                                                String newSem = CurrentSem.equals("Winter")?"Summer":"Winter";
+                                                student1.setCurrentSemester(newSem);
+                                            }
                                             break;
                                         }
                                     }
@@ -263,6 +268,7 @@ public class Admin extends User {
                     }
                 }
             }
+
 
     public static void initaliseAccs(){
         Admins.add(new Admin("admin","admin"));

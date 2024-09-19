@@ -13,6 +13,7 @@ public class Student extends User {
     public int Credits;
     private static int max_credits = 20;
     private String schedule;
+    private String CurrentSemester;
     String CGPA;
 
     public Student(String email, String password) {
@@ -197,23 +198,20 @@ public class Student extends User {
             JOptionPane.showMessageDialog(null, "Invalid choice");
         }
     }
+    public String getCurrentSemester() {
+        return this.CurrentSemester;
+    }
 
+    public void setCurrentSemester(String semester) {
+        this.CurrentSemester = semester;
+    }
     public static void initaliseAccs() {
         Students.add(new Student("sak", "sak"));
         Students.add(new Student("rishi", "rishi"));
         Students.add(new Student("saksham", "saksham"));
     }
 
-    public void checkAndMoveGradedCourses() {
-        List<Course> toBeMoved = new ArrayList<>();
-        for (Course course : courses) {
-            if (course.Course_grade != null && !course.Course_grade.isEmpty()) {
-                toBeMoved.add(course);
-            }
-        }
-        courses.removeAll(toBeMoved);
-        completed_courses.addAll(toBeMoved);
-    }
+
 
 }
 
