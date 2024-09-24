@@ -11,7 +11,7 @@ public class Course{
     //private String[] prerequisites;
     public int enrollement_limit ;
     public String class_timings ;
-    static List<String> StudentList = new ArrayList<>();
+    public List<String> StudentList = new ArrayList<>();
     public String[] preRequisites;
 
     public Course(String CCode, int Cred, String name, String Professor_taking, int limit, String timings, String[] preRequisites){

@@ -9,6 +9,7 @@ abstract public class User {
     public static List<Student> Students = new ArrayList<>();
     public static List<Professor> Professors = new ArrayList<>();
     public static List<Admin> Admins = new ArrayList<>();
+    public static List<TeachingAssistant> TeachingAssistants = new ArrayList<>();
     public static List<Complaints> Complaints = new ArrayList<>();
 
     public User(String email, String password) {
@@ -28,7 +29,6 @@ abstract public class User {
         Course OOP = new Course("OOP", 4, "Object Oriented Programming", "Prof. C", 50, "14:00-15:00", new String[]{"DSA", "CSA"});
         Course DBMS = new Course("DBMS", 4, "Database Management Systems", "Prof. D", 50, "16:00-17:00", new String[]{"DSA", "CSA", "OOP"});
         Course OS = new Course("OS", 4, "Operating Systems", "Prof. E", 50, "18:00-19:00", new String[]{"DSA", "CSA", "OOP", "DBMS"});
-
         if (CourseList.size() == 0) {
             CourseList.add(DSA);
         }

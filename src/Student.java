@@ -22,49 +22,6 @@ public class Student extends User {
         this.password = password;
     }
 
-    public boolean login() {
-        JOptionPane.showMessageDialog(null, "Please create or login to continue\n Choose 1 for creating a new account\n Choose 2 for login");
-        int choice = Integer.parseInt(JOptionPane.showInputDialog(null, "Enter your choice"));
-        boolean flag = false;
-
-        if (choice == 1) {
-            JOptionPane.showMessageDialog(null, "Please create a new account to continue");
-            String email = JOptionPane.showInputDialog(null, "Enter your email");
-            String password = JOptionPane.showInputDialog(null, "Enter your password");
-            Student user = new Student(email, password);
-            Students.add(user);
-            JOptionPane.showMessageDialog(null, "Account created successfully\nPlease login to continue");
-            String email1 = JOptionPane.showInputDialog(null, "Enter your email");
-            String password1 = JOptionPane.showInputDialog(null, "Enter your password");
-            for (int i = 0; i < User.Students.size(); i++) {
-                if (User.Students.get(i).email.equals(email1) && User.Students.get(i).password.equals(password1)) {
-                    JOptionPane.showMessageDialog(null, "Login successful");
-                    flag = true;
-                    break;
-                } else {
-                    continue;
-                }
-            }
-        } else if (choice == 2) {
-            JOptionPane.showMessageDialog(null, "Please login to continue");
-            String email = JOptionPane.showInputDialog(null, "Enter your email");
-            String password = JOptionPane.showInputDialog(null, "Enter your password");
-            Student user = new Student(email, password);
-            for (int i = 0; i < User.Students.size(); i++) {
-                if (User.Students.get(i).email.equals(email) && User.Students.get(i).password.equals(password)) {
-                    JOptionPane.showMessageDialog(null, "Login successful");
-                    flag = true;
-                    break;
-                } else {
-                    continue;
-                }
-            }
-        } else {
-            JOptionPane.showMessageDialog(null, "Invalid choice");
-        }
-        return flag;
-    }
-
     public static void studentMenu(Student student) {
         JOptionPane.showMessageDialog(null, "Welcome Student");
         while (true) {
@@ -127,7 +84,7 @@ public class Student extends User {
                 if (prerequisitesMet) {
                     if (this.Credits < 20 && course.Credits + this.Credits <= 20) {
                         courses.add(course);
-                        Course.StudentList.add(this.email);
+                        course.StudentList.add(this.email);
                         this.Credits += course.Credits;
                     } else {
                         JOptionPane.showMessageDialog(null, "You have exceeded the maximum credit limit");
@@ -147,7 +104,7 @@ public class Student extends User {
         for (Course course : this.courses) {
             if (course.CCode.equals(course_name)) {
                 courses.remove(course);
-                Course.StudentList.remove(User.email);
+                course.StudentList.remove(User.email);
                 JOptionPane.showMessageDialog(null, "Course dropped successfully");
                 break;
             }

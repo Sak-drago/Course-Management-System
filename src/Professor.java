@@ -17,55 +17,7 @@ public class Professor extends User {
         this.CourseCode = CourseCode;
     }
 
-    public boolean login() {
-        JOptionPane.showMessageDialog(null, "Please create or login to continue\n Choose 1 for creating a new account\n Choose 2 for login");
-        int choice = Integer.parseInt(JOptionPane.showInputDialog(null, "Enter your choice"));
-        boolean flag = false;
-        String superkey = "Professors";
-        if (choice == 1) {
-            JOptionPane.showMessageDialog(null, "Please enter the Superkey before continuing");
-            String superkey1 = JOptionPane.showInputDialog(null, "Enter the Superkey");
-            if (superkey1.equals(superkey)) {
-                JOptionPane.showMessageDialog(null, "Superkey accepted");
-            } else {
-                JOptionPane.showMessageDialog(null, "Superkey not accepted");
-                return false;
-            }
-            String email = JOptionPane.showInputDialog(null, "Enter your email");
-            String password = JOptionPane.showInputDialog(null, "Enter your password");
-            Professor user = new Professor(email, password, "");
-            Professors.add(user);
-            JOptionPane.showMessageDialog(null, "Account created successfully\nPlease login to continue");
-            String email1 = JOptionPane.showInputDialog(null, "Enter your email");
-            String password1 = JOptionPane.showInputDialog(null, "Enter your password");
-            for (int i = 0; i < User.Professors.size(); i++) {
-                if (User.Professors.get(i).email.equals(email) && User.Professors.get(i).password.equals(password)) {
-                    JOptionPane.showMessageDialog(null, "Login successful");
-                    flag = true;
-                    break;
-                } else {
-                    continue;
-                }
-            }
-        } else if (choice == 2) {
-            JOptionPane.showMessageDialog(null, "Please login to continue");
-            String email = JOptionPane.showInputDialog(null, "Enter your email");
-            String password = JOptionPane.showInputDialog(null, "Enter your password");
-            Professor user = new Professor(email, password,"");
-            for (int i = 0; i < User.Professors.size(); i++) {
-                if (User.Professors.get(i).email.equals(email) && User.Professors.get(i).password.equals(password)) {
-                    JOptionPane.showMessageDialog(null, "Login successful");
-                    flag = true;
-                    break;
-                } else {
-                    continue;
-                }
-            }
-        } else {
-            JOptionPane.showMessageDialog(null, "Invalid choice");
-        }
-        return flag;
-    }
+
 
     public static void professorMenu(Professor professor) {
         while (true) {
@@ -74,7 +26,7 @@ public class Professor extends User {
             if (choice == 1) {
                 professor.edit_course();
             } else if (choice == 2) {
-                view_student_list_course();
+                professor.view_student_list_course();
             } else if (choice == 3) {
                 JOptionPane.showMessageDialog(null, "Logout Successful");
                 break;
@@ -84,12 +36,12 @@ public class Professor extends User {
         }
     }
 
-    public static void view_student_list_course() {
+    public void view_student_list_course() {
         String courseCode = JOptionPane.showInputDialog(null, "Enter the course code of the course you want to view the list of students");
         StringBuilder students_list = new StringBuilder("Student List\n");
         for (Course course : User.CourseList) {
             if (course.CCode.equals(courseCode)) {
-                for (String student_email : Course.StudentList) {
+                for (String student_email : course.StudentList) {
                     students_list.append("Email: ").append(student_email).append("\n");
                 }
                 JOptionPane.showMessageDialog(null, students_list.toString());
