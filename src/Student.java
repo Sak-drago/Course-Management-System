@@ -201,6 +201,11 @@ public class Student extends User {
         if (choice == 0) {
             int rating = Integer.parseInt(JOptionPane.showInputDialog(null, "Enter your rating (1-5)"));
             feedbackList.add(new Feedback<>(Code , this.email, rating));
+            for(int i = 0;i<User.CourseList.size();i++){
+                if(User.CourseList.get(i).CCode.equals(Code)){
+                    User.CourseList.get(i).feedbackList.add(new Feedback<>(Code , this.email, rating));
+                }
+            }
         } else if (choice == 1) {
             String comment = JOptionPane.showInputDialog(null, "Enter your feedback");
             feedbackList.add(new Feedback<>(Code , this.email, comment));

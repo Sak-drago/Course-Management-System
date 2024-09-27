@@ -21,13 +21,15 @@ public class Professor extends User {
 
     public static void professorMenu(Professor professor) {
         while (true) {
-            JOptionPane.showMessageDialog(null, "Please select an option\n (1)Edit Course\n (2)View Student List of a Course\n (3)Logout");
+            JOptionPane.showMessageDialog(null, "Please select an option\n (1)Edit Course\n (2)View Student List of a Course\n (3)View Feedback\n (4)Logout");
             int choice = Integer.parseInt(JOptionPane.showInputDialog(null, "Enter your choice"));
             if (choice == 1) {
                 professor.edit_course();
             } else if (choice == 2) {
                 professor.view_student_list_course();
             } else if (choice == 3) {
+                professor.view_feedback();
+            } else if (choice == 4) {
                 JOptionPane.showMessageDialog(null, "Logout Successful");
                 break;
             } else {
@@ -50,6 +52,19 @@ public class Professor extends User {
         }
     }
 
+    public void view_feedback(){
+        String courseCode = JOptionPane.showInputDialog(null, "Enter the course code of the course you want to view the feedback of");
+        for (Course course : User.CourseList) {
+            if (course.CCode.equals(courseCode)) {
+                StringBuilder feedback_list = new StringBuilder("Feedback List\n");
+                for (Feedback<?> feedback : course.feedbackList) {
+                    feedback_list.append("Student Email: ").append(feedback.getStudentEmail()).append("\nFeedback: ").append(feedback.getFeedback()).append("\n");
+                }
+                JOptionPane.showMessageDialog(null, feedback_list.toString());
+                break;
+            }
+        }
+    }
 
     public void edit_course() {
         String courseCode = JOptionPane.showInputDialog(null, "Enter the course code of the course you want to edit");

@@ -13,6 +13,7 @@ public class Course{
     public String class_timings ;
     public List<String> StudentList = new ArrayList<>();
     public String[] preRequisites;
+    public List<Feedback> feedbackList = new ArrayList<>();
 
     public Course(String CCode, int Cred, String name, String Professor_taking, int limit, String timings, String[] preRequisites){
         this.CCode = CCode;
