@@ -13,6 +13,8 @@ public class Main {
                 Student student = s_login();
                 if(student == null){
                     JOptionPane.showMessageDialog(null,"Login not found");
+                    JOptionPane.showMessageDialog(null,"Restarting CMS");
+                    break;
                 }
                 Student.studentMenu(student);
             }
@@ -20,6 +22,8 @@ public class Main {
                 TeachingAssistant ta = ta_login();
                 if(ta == null){
                     JOptionPane.showMessageDialog(null,"Login not found");
+                    JOptionPane.showMessageDialog(null,"Restarting CMS");
+                    break;
                 }
                 TeachingAssistant.teachingAssistantMenu(ta);
             }
@@ -27,6 +31,8 @@ public class Main {
                 Professor professor = p_login();
                 if(professor == null){
                     JOptionPane.showMessageDialog(null,"Login not found");
+                    JOptionPane.showMessageDialog(null,"Restarting CMS");
+                    break;
                 }
                 Professor.professorMenu(professor);
             }
@@ -34,6 +40,8 @@ public class Main {
                 Admin admin = a_login();
                 if(admin == null){
                     JOptionPane.showMessageDialog(null,"Login not found");
+                    JOptionPane.showMessageDialog(null,"Restarting CMS");
+                    break;
                 }
                 Admin.adminMenu(admin);
             }
@@ -64,7 +72,7 @@ public class Main {
                 if (User.Students.get(i).email.equals(email1) && User.Students.get(i).password.equals(password1)) {
                     JOptionPane.showMessageDialog(null, "Login successful");
                     flag = true;
-                    break;
+                    return User.Students.get(i);
                 } else {
                     continue;
                 }
@@ -179,7 +187,7 @@ public class Main {
                 if (User.Professors.get(i).email.equals(email) && User.Professors.get(i).password.equals(password)) {
                     JOptionPane.showMessageDialog(null, "Login successful");
                     flag = true;
-                    break;
+                    return User.Professors.get(i);
                 } else {
                     continue;
                 }

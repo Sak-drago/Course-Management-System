@@ -1,8 +1,5 @@
 import javax.swing.*;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class Student extends User {
     public List<Course> courses = new ArrayList<>();
@@ -15,6 +12,7 @@ public class Student extends User {
     private String schedule;
     private String CurrentSemester;
     String CGPA;
+    public List<Feedback<?>> feedbackList = new ArrayList<>();
 
     public Student(String email, String password) {
         super(email, password);
@@ -25,7 +23,7 @@ public class Student extends User {
     public static void studentMenu(Student student) {
         JOptionPane.showMessageDialog(null, "Welcome Student");
         while (true) {
-            JOptionPane.showMessageDialog(null, "Please select if you want to\n (1) View Courses\n (2) View Grades\n (3) Register for a course\n (4) Drop a course\n (5) View Schedule\n (6) Complaint Portal\n (7) Logout");
+            JOptionPane.showMessageDialog(null, "Please select if you want to\n (1) View Courses\n (2) View Grades\n (3) Register for a course\n (4) Drop a course\n (5) View Schedule\n (6) Complaint Portal\n (7) Feedback Portal\n (8) Logout");
             int option = Integer.parseInt(JOptionPane.showInputDialog(null, "Enter your choice"));
             if (option == 1) {
                 student.view_registered_courses();
@@ -40,12 +38,22 @@ public class Student extends User {
             } else if (option == 6) {
                 student.submit_complaint();
             } else if (option == 7) {
+                student.feedbackMenu();
+            } else if (option == 8) {
                 JOptionPane.showMessageDialog(null, "Logout successful");
                 break;
             } else {
                 JOptionPane.showMessageDialog(null, "Invalid choice");
             }
         }
+    }
+
+    public static int getMax_credits() {
+        return max_credits;
+    }
+
+    public static void setMax_credits(int max_credits) {
+        Student.max_credits = max_credits;
     }
 
     public void view_registered_courses() {
@@ -70,7 +78,7 @@ public class Student extends User {
                 boolean prerequisitesMet = true;
                 for (String prerequisite : course.preRequisites) {
                     boolean hasPrerequisite = false;
-                    for (Course completedCourse : courses) {
+                    for (Course completedCourse : completed_courses) {
                         if (completedCourse.CCode.equals(prerequisite)) {
                             hasPrerequisite = true;
                             break;
@@ -156,6 +164,51 @@ public class Student extends User {
         return this.CurrentSemester;
     }
 
+    public void feedbackMenu(){
+        int choice  = JOptionPane.showOptionDialog(null, "Choose the type of feedback", "Feedback", JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null, new String[]{"View Feedback Given", "Give Feedback"}, null);
+        if(choice == 0) {
+            viewFeedback();
+        }
+        else if(choice == 1) {
+            giveFeedback();
+        }
+        else {
+            JOptionPane.showMessageDialog(null, "Invalid choice");
+        }
+    }
+
+    public void viewFeedback(){
+        String feedbacks = "";
+        for (Feedback<?> feedback : feedbackList) {
+            feedbacks += feedback.toString() + "\n";
+        }
+        JOptionPane.showMessageDialog(null, feedbacks);
+    }
+    public void giveFeedback() {
+        String Code = JOptionPane.showInputDialog(null, "Enter the Course Code for feedback");
+        if(completed_courses.isEmpty()){
+            JOptionPane.showMessageDialog(null, "Course not Completed or does not exist");
+            return;
+        }
+        for (Course completedCours : completed_courses) {
+            if (!(Objects.equals(completedCours.CCode, Code))) {
+                JOptionPane.showMessageDialog(null, "Course not Completed or does not exist");
+                return;
+            }
+        }
+
+        int choice = JOptionPane.showOptionDialog(null, "Choose the type of feedback", "Feedback", JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null, new String[]{"Rating", "Comment"}, null);
+        if (choice == 0) {
+            int rating = Integer.parseInt(JOptionPane.showInputDialog(null, "Enter your rating (1-5)"));
+            feedbackList.add(new Feedback<>(Code , this.email, rating));
+        } else if (choice == 1) {
+            String comment = JOptionPane.showInputDialog(null, "Enter your feedback");
+            feedbackList.add(new Feedback<>(Code , this.email, comment));
+        } else {
+            JOptionPane.showMessageDialog(null, "Invalid feedback type");
+        }
+    }
+
     public void setCurrentSemester(String semester) {
         this.CurrentSemester = semester;
     }
@@ -164,8 +217,6 @@ public class Student extends User {
         Students.add(new Student("rishi", "rishi"));
         Students.add(new Student("saksham", "saksham"));
     }
-
-
 
 }
 
