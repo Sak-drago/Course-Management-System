@@ -1,6 +1,6 @@
 import javax.swing.*;
 public class Main {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws InvalidLoginE {
         JOptionPane.showMessageDialog(null, "Welcome to the Course Management System");
         Admin.initaliseAccs();
         Student.initaliseAccs();
@@ -10,28 +10,43 @@ public class Main {
         while (true) {
             int choice = JOptionPane.showOptionDialog(null, "Choose the type of user", "CMS", JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null, new String[]{"Student", "TA", "Professor", "Admin", "Exit"}, null);
             if (choice == 0) {
-                Student student = s_login();
-                if(student == null){
-                    JOptionPane.showMessageDialog(null,"Login not found");
-                    JOptionPane.showMessageDialog(null,"Restarting CMS");
+                Student student;
+                try {
+                    student = s_login();
+                    if(student == null){throw new InvalidLoginE("Login not found");}
+                } catch (InvalidLoginE e) {
+                    JOptionPane.showMessageDialog(null, e.getMessage());
+                    JOptionPane.showMessageDialog(null, "Restarting CMS");
                     break;
                 }
                 Student.studentMenu(student);
             }
             else if (choice == 1) {
-                TeachingAssistant ta = ta_login();
-                if(ta == null){
-                    JOptionPane.showMessageDialog(null,"Login not found");
-                    JOptionPane.showMessageDialog(null,"Restarting CMS");
+                TeachingAssistant ta;
+                try {
+                    ta = ta_login();
+                    if (ta == null) {
+                        throw new InvalidLoginE("Login not found");
+                    }
+                }
+                catch (InvalidLoginE e) {
+                    JOptionPane.showMessageDialog(null, e.getMessage());
+                    JOptionPane.showMessageDialog(null, "Restarting CMS");
                     break;
                 }
                 TeachingAssistant.teachingAssistantMenu(ta);
             }
             else if (choice == 2) {
-                Professor professor = p_login();
-                if(professor == null){
-                    JOptionPane.showMessageDialog(null,"Login not found");
-                    JOptionPane.showMessageDialog(null,"Restarting CMS");
+                Professor professor;
+                try {
+                    professor = p_login();
+                   if(professor == null){
+                       throw new InvalidLoginE("Login not found");
+                    }
+                }
+                catch (InvalidLoginE e) {
+                    JOptionPane.showMessageDialog(null, e.getMessage());
+                    JOptionPane.showMessageDialog(null, "Restarting CMS");
                     break;
                 }
                 Professor.professorMenu(professor);
